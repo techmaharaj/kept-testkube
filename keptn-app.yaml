@@ -1,0 +1,10 @@
+apiVersion: lifecycle.keptn.sh/v1
+kind: KeptnApp
+metadata:
+  name: nginx-application
+  namespace: default
+spec:
+  version: "1.0.0"
+  workloads:
+    - name: nginx-app
+      version: "1.0.0"
