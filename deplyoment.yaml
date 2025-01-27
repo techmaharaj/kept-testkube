@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-app
+  annotations:
+    keptn.sh/post-deployment-tasks: "url-test-runner"
+    keptn.sh/version: "1.0.0"
+    keptn.sh/app: nginx-application
+  labels:
+    app.kubernetes.io/name: nginx-app
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: keptn
+    app.kubernetes.io/part-of: nginx-application
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+        app.kubernetes.io/name: nginx-app
+        app.kubernetes.io/version: "1.0.0"
+        app.kubernetes.io/managed-by: keptn
+        app.kubernetes.io/part-of: nginx-application
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
